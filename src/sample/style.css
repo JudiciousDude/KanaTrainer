@@ -1,0 +1,7 @@
+VBox{
+	-fx-background-color: white;
+}
+
+Button{
+    -fx-font-size: 16px;
+}
