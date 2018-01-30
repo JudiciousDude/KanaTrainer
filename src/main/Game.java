@@ -13,14 +13,17 @@ public class Game {
     private Kana kanaRound;
     private LinkedList<Kana> roundQueue;
 
+
+
     public Game(int KANA){
         switch (KANA) {
             case Kana.HIRAGANA:
-                Controller.buttonTexts = Kana.hiraganaSigns; break;
+                trainerController.setButtonTexts(Kana.hiraganaSigns); break;
             case Kana.KATAKANA:
-                Controller.buttonTexts = Kana.katakanaSigns; break;
+                trainerController.setButtonTexts(Kana.katakanaSigns); break;
             default:
-                Controller.buttonTexts = Kana.hiraganaSigns; break;
+                System.out.print("ERROR IN SETTING BUTTONTEXTS");
+                trainerController.setButtonTexts(Kana.hiraganaSigns); break;
         }
 
         signMap = Kana.getKanaMap(KANA);
@@ -30,23 +33,27 @@ public class Game {
         kanaRound = roundQueue.poll();
     }
 
-    public String getRoundLabel() {
+    public String getRoundReading() {
         return kanaRound.getReading();
     }
 
-    public boolean nextRound(String txt){
-        if(roundQueue.isEmpty()){
-            System.out.print("Right answers count: " + rightAnswers);
-            return false;
-        }
+    public int nextRound(String txt){
         if (signMap.get(txt) == kanaRound.getReading()){
-            kanaRound = roundQueue.poll();
             rightAnswers++;
-            System.out.print('+');
-            return true;
+            if(roundQueue.isEmpty()){
+                return 0;
+            }
+            kanaRound = roundQueue.poll();
+            return 2;
+        }
+        if(roundQueue.isEmpty()){
+            return 0;
         }
         kanaRound = roundQueue.poll();
-        return false;
+        return 1;
     }
 
+    public int getRightAnswers() {
+        return rightAnswers;
+    }
 }

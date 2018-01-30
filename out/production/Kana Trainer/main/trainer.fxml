@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="500" maxWidth="700" minHeight="350" minWidth="460" prefHeight="500.0" prefWidth="700.0" stylesheets="main/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller" fx:id="vBox">
+<VBox maxHeight="500" maxWidth="700" minHeight="350" minWidth="460" prefHeight="500.0" prefWidth="700.0" stylesheets="main/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.trainerController" fx:id="vBox">
    <children>
       <GridPane VBox.vgrow="SOMETIMES">
         <columnConstraints>

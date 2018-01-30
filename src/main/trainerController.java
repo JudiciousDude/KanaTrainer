@@ -10,23 +10,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Controller {
+public class trainerController {
     @FXML
-    private VBox vBox;
+    public VBox vBox;
     @FXML
     Label LabeL;
 
     private Game game;
-    public static String[] buttonTexts;
+    private static String[] buttonTexts;
+    private static int mode;
+
+    public static void setButtonTexts(String[] kanaSigns) {
+        buttonTexts = kanaSigns;
+    }
+
+    public static void setMode(int KANAMode) {
+        mode = KANAMode;
+    }
+
 
     @FXML
     public void initialize(){
-        game = new Game(Kana.HIRAGANA);
+        game = new Game(mode);
+
         vBox.setAlignment(Pos.CENTER);
         ArrayList<Button> buttons = new ArrayList<>();
 
@@ -36,9 +48,15 @@ public class Controller {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    if(game.nextRound(btn.getText()))
-                        btn.setVisible(false);
-                    LabeL.setText(game.getRoundLabel());
+                    switch (game.nextRound(btn.getText())){
+                        case 2: btn.setVisible(false); break;
+                        case 1: break;
+                        case 0:
+                            menuController.printGameResult(game);
+                            ((Stage)btn.getScene().getWindow()).close(); break;
+                        default: System.out.print("ERROR");
+                    }
+                    LabeL.setText(game.getRoundReading());
                 }
             });
 
@@ -61,8 +79,7 @@ public class Controller {
             }
         }
 
-        LabeL.setText(game.getRoundLabel());
-
+        LabeL.setText(game.getRoundReading());
     }
 
 }
