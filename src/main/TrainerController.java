@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,15 +15,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class trainerController {
+public class TrainerController {
     @FXML
     public VBox vBox;
     @FXML
-    Label LabeL;
+    Label reading;
 
     private Game game;
     private static String[] buttonTexts;
     private static int mode;
+    private static MenuController menuController;
+
+    public static void setOwner(MenuController owner){
+        menuController = owner;
+    }
 
     public static void setButtonTexts(String[] kanaSigns) {
         buttonTexts = kanaSigns;
@@ -34,12 +38,9 @@ public class trainerController {
         mode = KANAMode;
     }
 
-
     @FXML
     public void initialize(){
         game = new Game(mode);
-
-        vBox.setAlignment(Pos.CENTER);
         ArrayList<Button> buttons = new ArrayList<>();
 
         for (int i = 0; i < 46; i++){
@@ -49,14 +50,14 @@ public class trainerController {
                 @Override
                 public void handle(ActionEvent event) {
                     switch (game.nextRound(btn.getText())){
-                        case 2: btn.setVisible(false); break;
+                        case 2: btn.setDisable(true); break;
                         case 1: break;
                         case 0:
                             menuController.printGameResult(game);
                             ((Stage)btn.getScene().getWindow()).close(); break;
                         default: System.out.print("ERROR");
                     }
-                    LabeL.setText(game.getRoundReading());
+                    reading.setText(game.getRoundReading());
                 }
             });
 
@@ -79,7 +80,7 @@ public class trainerController {
             }
         }
 
-        LabeL.setText(game.getRoundReading());
+        reading.setText(game.getRoundReading());
     }
 
 }

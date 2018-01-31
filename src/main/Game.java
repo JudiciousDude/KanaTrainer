@@ -18,12 +18,12 @@ public class Game {
     public Game(int KANA){
         switch (KANA) {
             case Kana.HIRAGANA:
-                trainerController.setButtonTexts(Kana.hiraganaSigns); break;
+                TrainerController.setButtonTexts(Kana.hiraganaSigns); break;
             case Kana.KATAKANA:
-                trainerController.setButtonTexts(Kana.katakanaSigns); break;
+                TrainerController.setButtonTexts(Kana.katakanaSigns); break;
             default:
                 System.out.print("ERROR IN SETTING BUTTONTEXTS");
-                trainerController.setButtonTexts(Kana.hiraganaSigns); break;
+                TrainerController.setButtonTexts(Kana.hiraganaSigns); break;
         }
 
         signMap = Kana.getKanaMap(KANA);
