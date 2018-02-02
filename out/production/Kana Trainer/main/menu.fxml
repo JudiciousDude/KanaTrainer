@@ -9,36 +9,36 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MenuController">
    <children>
-      <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="133.0" prefWidth="600.0">
+      <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="133.0" prefWidth="600.0">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <RadioButton mnemonicParsing="false" onAction="#setKana" selected="true" text="Hiragana">
+                  <RadioButton focusTraversable="false" mnemonicParsing="false" onAction="#setKana" selected="true" text="Hiragana">
                      <toggleGroup>
                         <ToggleGroup fx:id="kanaMode" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" onAction="#setKana" text="Katakana" toggleGroup="$kanaMode" />
+                  <RadioButton focusTraversable="false" mnemonicParsing="false" onAction="#setKana" text="Katakana" toggleGroup="$kanaMode" />
                </children>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <RadioButton disable="true" mnemonicParsing="false" text="Sign mode">
+                  <RadioButton disable="true" focusTraversable="false" mnemonicParsing="false" text="Sign mode">
                      <toggleGroup>
                         <ToggleGroup fx:id="mode" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton disable="true" mnemonicParsing="false" text="Reading mode" toggleGroup="$mode" />
+                  <RadioButton disable="true" focusTraversable="false" mnemonicParsing="false" text="Reading mode" toggleGroup="$mode" />
                </children>
             </VBox>
          </children>
       </FlowPane>
-      <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+      <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="56.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#startGame" prefHeight="25.0" prefWidth="136.0" text="Start" />
+            <Button contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#startGame" prefHeight="25.0" prefWidth="136.0" text="Start" />
          </children>
       </FlowPane>
-      <FlowPane alignment="CENTER" orientation="VERTICAL">
+      <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="144.0" prefWidth="600.0">
          <children>
             <Label fx:id="answersCount" text=" " />
             <Label fx:id="wastedTime" text=" " />

@@ -19,9 +19,9 @@ public class TrainerController {
     @FXML
     public VBox vBox;
     @FXML
-    Label reading;
+    private Label reading;
 
-    private Game game;
+    private static Game game;
     private static String[] buttonTexts;
     private static int mode;
     private static MenuController menuController;
@@ -46,30 +46,28 @@ public class TrainerController {
         for (int i = 0; i < 46; i++){
             Button btn = new Button(buttonTexts[i]);
 
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    switch (game.nextRound(btn.getText())){
-                        case 2: btn.setDisable(true); break;
-                        case 1: break;
-                        case 0:
-                            menuController.printGameResult(game);
-                            ((Stage)btn.getScene().getWindow()).close(); break;
-                        default: System.out.print("ERROR");
-                    }
-                    reading.setText(game.getRoundReading());
+            btn.setOnAction(event -> {
+                switch (game.nextRound(btn.getText())){
+                    case 2: btn.setDisable(true);btn.setOpacity(0.2); break;
+                    case 1: break;
+                    case 0:
+                        game.stop();
+                        menuController.printGameResult(game);
+                        ((Stage)btn.getScene().getWindow()).close(); break;
+                    default: System.out.print("ERROR");
                 }
+                reading.setText(game.getRoundReading());
             });
-
             GridPane.setHalignment(btn, HPos.CENTER);
             GridPane.setValignment(btn, VPos.BOTTOM);
+            btn.setFocusTraversable(false);
             buttons.add(btn);
         }
 
         long seed = System.nanoTime();
         Collections.shuffle(buttons, new Random(seed));
 
-        GridPane gridPane = (GridPane)vBox.getChildren().get(1);
+        GridPane gridPane = (GridPane)vBox.getChildren().get(2);
 
         int k = 0;
         for (int i = 0; i < 4; i++) {
@@ -81,6 +79,11 @@ public class TrainerController {
         }
 
         reading.setText(game.getRoundReading());
+        game.start();
     }
 
+    public static void close(){
+        game.stop();
+        menuController.printGameResult(game);
+    }
 }

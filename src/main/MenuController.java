@@ -12,8 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class MenuController {
 
@@ -36,7 +34,7 @@ public class MenuController {
         }
     }
 
-    public void startGame(ActionEvent event) throws IOException {
+    public void startGame(ActionEvent event){
         switch (kana) {
             case Kana.HIRAGANA:
                 TrainerController.setMode(Kana.HIRAGANA); break;
@@ -47,25 +45,34 @@ public class MenuController {
                 TrainerController.setMode(Kana.HIRAGANA); break;
         }
         Stage trainingStage = new Stage();
-        VBox vBox = FXMLLoader.load(getClass().getResource("trainer.fxml"));
+        try {
+            VBox vBox = FXMLLoader.load(getClass().getResource("trainer.fxml"));
 
-        trainingStage.setTitle("Kana Trainer");
-        trainingStage.setScene(new Scene(vBox, 700, 500));
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
-        trainingStage.setMaxHeight(500);
-        trainingStage.setMaxWidth(700);
-        trainingStage.setMinWidth(460);
-        trainingStage.setMinHeight(350);
-        trainingStage.initModality(Modality.WINDOW_MODAL);
-        TrainerController.setOwner(this);
 
-        trainingStage.initOwner(((Node)event.getSource()).getScene().getWindow());
+            trainingStage.setTitle("Kana Trainer");
+            trainingStage.setScene(new Scene(vBox, 700, 500));
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            trainingStage.setMaxHeight(500);
+            trainingStage.setMaxWidth(700);
+            trainingStage.setMinWidth(460);
+            trainingStage.setMinHeight(350);
+            trainingStage.initModality(Modality.WINDOW_MODAL);
+            trainingStage.setOnCloseRequest(e -> TrainerController.close());
 
-        trainingStage.show();
+            trainingStage.initOwner(((Node)event.getSource()).getScene().getWindow());
+            TrainerController.setOwner(this);
+
+            trainingStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void printGameResult(Game endedGame){
         answersCount.setText("Right answers: " + endedGame.getRightAnswers() + "/46");
+        int minutes = endedGame.getWastedTime()/60;
+        wastedTime.setText("Wasted time: " + minutes + "." + endedGame.getWastedTime()%60);
     }
 
 }
