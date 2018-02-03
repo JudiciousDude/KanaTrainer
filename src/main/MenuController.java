@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,8 +21,13 @@ public class MenuController {
     private Label answersCount;
     @FXML
     private Label wastedTime;
+    @FXML
+    CheckBox hard;
+    @FXML
+    ToggleGroup version;
 
     private int kana = Kana.HIRAGANA;
+    private int mode = 1;
 
     public void setKana(ActionEvent event){
         switch (((RadioButton)event.getSource()).getText()) {
@@ -31,6 +38,24 @@ public class MenuController {
             default:
                 System.out.print("ERROR IN SETTING KANA");
                 kana = Kana.HIRAGANA; break;
+        }
+    }
+
+    public void setMode(ActionEvent e){
+        RadioButton call = (RadioButton)e.getSource();
+        switch (call.getText()) {
+            case "Sign mode":
+                call.setVisible(false);
+                hard.setVisible(true);
+                mode = 1; break;
+            case "Reading mode":
+                ((RadioButton)version.getToggles().get(0)).setVisible(true);
+                hard.setSelected(false);
+                hard.setVisible(false);
+                mode = 2; break;
+            default:
+                System.out.print("ERROR IN SETTING MODE");
+                mode = 1; break;
         }
     }
 
@@ -46,21 +71,22 @@ public class MenuController {
         }
         Stage trainingStage = new Stage();
         try {
+            TrainerController.setHardMode(hard.isSelected());
+            TrainerController.setOwner(this);
+
             VBox vBox = FXMLLoader.load(getClass().getResource("trainer.fxml"));
 
 
             trainingStage.setTitle("Kana Trainer");
             trainingStage.setScene(new Scene(vBox, 700, 500));
-            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            //trainingStage.initStyle(StageStyle.UNDECORATED);
             trainingStage.setMaxHeight(500);
             trainingStage.setMaxWidth(700);
             trainingStage.setMinWidth(460);
             trainingStage.setMinHeight(350);
             trainingStage.initModality(Modality.WINDOW_MODAL);
             trainingStage.setOnCloseRequest(e -> TrainerController.close());
-
             trainingStage.initOwner(((Node)event.getSource()).getScene().getWindow());
-            TrainerController.setOwner(this);
 
             trainingStage.show();
         }

@@ -18,7 +18,7 @@ public class Game {
               }
           }
           catch (InterruptedException e){
-              e.printStackTrace();
+              System.out.println("Clock interrupted");
           }
       }
     };
@@ -33,18 +33,23 @@ public class Game {
     }
 
     public void stop(){
-        clock.stop();
+        clock.interrupt();
+    }
+
+    public double getProgressBarStep(){
+        double step = (1/(double)Kana.KANA_READINGS.length);
+        return step;
     }
 
     public Game(int KANA){
         switch (KANA) {
             case Kana.HIRAGANA:
-                TrainerController.setButtonTexts(Kana.hiraganaSigns); break;
+                TrainerController.setButtonTexts(Kana.HIRAGANA_SIGNS); break;
             case Kana.KATAKANA:
-                TrainerController.setButtonTexts(Kana.katakanaSigns); break;
+                TrainerController.setButtonTexts(Kana.KATAKANA_SIGNS); break;
             default:
                 System.out.print("ERROR IN SETTING BUTTONTEXTS");
-                TrainerController.setButtonTexts(Kana.hiraganaSigns); break;
+                TrainerController.setButtonTexts(Kana.HIRAGANA_SIGNS); break;
         }
 
         signMap = Kana.getKanaMap(KANA);

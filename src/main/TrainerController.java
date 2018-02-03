@@ -1,12 +1,11 @@
 package main;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,14 +19,21 @@ public class TrainerController {
     public VBox vBox;
     @FXML
     private Label reading;
+    @FXML
+    ProgressBar progress;
 
     private static Game game;
     private static String[] buttonTexts;
     private static int mode;
     private static MenuController menuController;
+    private static boolean randomButtons = false;
 
     public static void setOwner(MenuController owner){
         menuController = owner;
+    }
+
+    public static void setHardMode(boolean hard){
+        randomButtons = hard;
     }
 
     public static void setButtonTexts(String[] kanaSigns) {
@@ -40,6 +46,7 @@ public class TrainerController {
 
     @FXML
     public void initialize(){
+        progress.setProgress(0);
         game = new Game(mode);
         ArrayList<Button> buttons = new ArrayList<>();
 
@@ -47,12 +54,12 @@ public class TrainerController {
             Button btn = new Button(buttonTexts[i]);
 
             btn.setOnAction(event -> {
+                progress.setProgress(progress.getProgress() + game.getProgressBarStep());
                 switch (game.nextRound(btn.getText())){
-                    case 2: btn.setDisable(true);btn.setOpacity(0.2); break;
+                    case 2: btn.setDisable(true); btn.setOpacity(0.2); break;
                     case 1: break;
                     case 0:
-                        game.stop();
-                        menuController.printGameResult(game);
+                        close();
                         ((Stage)btn.getScene().getWindow()).close(); break;
                     default: System.out.print("ERROR");
                 }
@@ -64,8 +71,10 @@ public class TrainerController {
             buttons.add(btn);
         }
 
-        long seed = System.nanoTime();
-        Collections.shuffle(buttons, new Random(seed));
+        if(randomButtons) {
+            long seed = System.nanoTime();
+            Collections.shuffle(buttons, new Random(seed));
+        }
 
         GridPane gridPane = (GridPane)vBox.getChildren().get(2);
 
