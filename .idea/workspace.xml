@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/ReadingModeController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/reading_mode.fxml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Kana Trainer/main/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Kana Trainer/main/trainer.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Kana Trainer/main/trainerController.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Kana Trainer/main/Game.class" afterPath="$PROJECT_DIR$/out/production/Kana Trainer/main/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Kana Trainer/main/menuController.class" afterPath="$PROJECT_DIR$/out/production/Kana Trainer/main/menuController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Game.java" afterPath="$PROJECT_DIR$/src/main/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/MenuController.java" afterPath="$PROJECT_DIR$/src/main/MenuController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/TrainerController.java" afterPath="$PROJECT_DIR$/src/main/SignModeController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/style.css" afterPath="$PROJECT_DIR$/src/styles/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/trainer.fxml" afterPath="$PROJECT_DIR$/src/main/sigh_mode.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -457,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517701442686</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ReadingMode scene added.">
+      <created>1517783753179</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1517783753179</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -544,7 +541,8 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value="ProgressBar added. Fixed clock.stop. Sign mode: hard." />
-    <option name="LAST_COMMIT_MESSAGE" value="ProgressBar added. Fixed clock.stop. Sign mode: hard." />
+    <MESSAGE value="ReadingMode scene added." />
+    <option name="LAST_COMMIT_MESSAGE" value="ReadingMode scene added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
