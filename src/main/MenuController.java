@@ -4,12 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,7 +27,7 @@ public class MenuController {
     ToggleGroup version;
 
     private int kana = Kana.HIRAGANA;
-    private int mode = 1;
+    private int mode = 2;
 
     public void setKana(ActionEvent event){
         switch (((RadioButton)event.getSource()).getText()) {
@@ -59,40 +59,47 @@ public class MenuController {
         }
     }
 
+    //CALLING TRAINING MODE
     public void startGame(ActionEvent event){
-        switch (kana) {
-            case Kana.HIRAGANA:
-                TrainerController.setMode(Kana.HIRAGANA); break;
-            case Kana.KATAKANA:
-                TrainerController.setMode(Kana.KATAKANA); break;
-            default:
-                System.out.print("ERROR IN SETTING MODE");
-                TrainerController.setMode(Kana.HIRAGANA); break;
-        }
         Stage trainingStage = new Stage();
-        try {
-            TrainerController.setHardMode(hard.isSelected());
-            TrainerController.setOwner(this);
+        Parent scene;
 
-            VBox vBox = FXMLLoader.load(getClass().getResource("trainer.fxml"));
+        switch (mode) {
+            case 1:
+                SignModeController.setHardMode(hard.isSelected());
+                SignModeController.setOwner(this);
 
+                if(kana == Kana.HIRAGANA)SignModeController.setMode(Kana.HIRAGANA);
+                    else SignModeController.setMode(Kana.KATAKANA);
 
-            trainingStage.setTitle("Kana Trainer");
-            trainingStage.setScene(new Scene(vBox, 700, 500));
-            //trainingStage.initStyle(StageStyle.UNDECORATED);
-            trainingStage.setMaxHeight(500);
-            trainingStage.setMaxWidth(700);
-            trainingStage.setMinWidth(460);
-            trainingStage.setMinHeight(350);
-            trainingStage.initModality(Modality.WINDOW_MODAL);
-            trainingStage.setOnCloseRequest(e -> TrainerController.close());
-            trainingStage.initOwner(((Node)event.getSource()).getScene().getWindow());
+                try{scene = FXMLLoader.load(getClass().getResource("sigh_mode.fxml"));
+                    trainingStage.setScene(new Scene(scene, 700, 500));}
+                catch (IOException e){e.printStackTrace();}
+                trainingStage.setOnCloseRequest(e -> SignModeController.close());
 
-            trainingStage.show();
+                break;
+
+            case 2:
+                try{scene = FXMLLoader.load(getClass().getResource("reading_mode.fxml"));
+                    trainingStage.setScene(new Scene(scene, 700, 500));}
+                catch (IOException e){e.printStackTrace();}
+
+                break;
+
+            default:
+                System.out.println("ERROR IN MODE");
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+
+        trainingStage.setTitle("Kana Trainer");
+        //trainingStage.initStyle(StageStyle.UNDECORATED);
+        trainingStage.setMaxHeight(500);
+        trainingStage.setMaxWidth(700);
+        trainingStage.setMinWidth(460);
+        trainingStage.setMinHeight(350);
+        trainingStage.initModality(Modality.WINDOW_MODAL);
+        trainingStage.initOwner(((Node)event.getSource()).getScene().getWindow());
+
+        trainingStage.show();
     }
 
     public void printGameResult(Game endedGame){

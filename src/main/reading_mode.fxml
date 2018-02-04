@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox fx:id="vBox" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ReadingModeController">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="600.0">
+         <children>
+            <Label text="Timer here" />
+         </children>
+      </HBox>
+      <GridPane prefHeight="433.0" prefWidth="600.0">
+          <columnConstraints>
+              <ColumnConstraints></ColumnConstraints>
+          </columnConstraints>
+      </GridPane>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="69.0" prefWidth="600.0">
+         <children>
+            <Button mnemonicParsing="false" text="Give up" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

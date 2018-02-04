@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class TrainerController {
+public class SignModeController {
     @FXML
     public VBox vBox;
     @FXML
     private Label reading;
     @FXML
-    ProgressBar progress;
+    private ProgressBar progress;
 
     private static Game game;
     private static String[] buttonTexts;
