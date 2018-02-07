@@ -75,8 +75,8 @@ public class MenuController {
                 try{scene = FXMLLoader.load(getClass().getResource("sigh_mode.fxml"));
                     trainingStage.setScene(new Scene(scene, 700, 500));}
                 catch (IOException e){e.printStackTrace();}
-                trainingStage.setOnCloseRequest(e -> SignModeController.close());
 
+                trainingStage.setOnCloseRequest(e -> SignModeController.close());
                 break;
 
             case 2:

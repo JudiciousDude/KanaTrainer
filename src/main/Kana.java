@@ -2,6 +2,7 @@ package main;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Kana {
     private String sign;
@@ -65,8 +66,8 @@ public class Kana {
         return kana;
     }
 
-    public static HashMap<String, String> getKanaMap(int KANA){
-        HashMap<String, String> map = new HashMap<>();
+    public static Map<String, String> getKanaMap(int KANA){
+        Map<String, String> map = new HashMap<>();
         int i = 0;
 
         switch (KANA){

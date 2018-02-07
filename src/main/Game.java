@@ -1,10 +1,7 @@
 package main;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
 
@@ -23,7 +20,7 @@ public class Game {
       }
     };
     private int rightAnswers = 0;
-    private HashMap signMap;
+    private Map signMap;
     private Kana kanaRound;
     private LinkedList<Kana> roundQueue;
     private int wastedTime = 0;
@@ -64,7 +61,7 @@ public class Game {
     }
 
     public int nextRound(String txt){
-        if (signMap.get(txt) == kanaRound.getReading()){
+        if (signMap.get(txt).equals(kanaRound.getReading())){
             rightAnswers++;
             if(roundQueue.isEmpty()){
                 return 0;
